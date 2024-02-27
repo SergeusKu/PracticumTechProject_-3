@@ -27,8 +27,8 @@ public class DishesData {
         return dishesByType.get(typeOfDish).contains(dishName);
     }
 
-    // Метод для получения блюда по типу
-    ArrayList<String> printDishesByType(String typeOfDish){
+    // Метод для получения списка блюд по типу
+    ArrayList<String> getAllDishesByType(String typeOfDish){
         ArrayList<String> dishesList = new ArrayList<>();
         for (String dishes : dishesByType.get(typeOfDish)) {
             dishesList.add(dishes);
@@ -38,8 +38,9 @@ public class DishesData {
 
 
     // Метод для получения количества блюд в категории
-    ArrayList<String> getCountOfDishesByType(String typeOfDish){
-        return dishesByType.get(typeOfDish);
+    Integer getCountDishesByType(String dishesTypes){
+
+        return dishesByType.get(dishesTypes).size();
     }
 
     Boolean checkDishesType(String typeOfDish){

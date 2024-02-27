@@ -30,9 +30,6 @@ public class Main {
                     break;
                 case "4":
                     return;
-                case "5":
-                    printAllDinner();
-                    break;
                 default:
                     System.out.println("Нет такой команды!");
             }
@@ -65,12 +62,7 @@ public class Main {
     private static void printAllDishByType() {
         System.out.println("Введите тип блюда:");
         String dishType = scanner.nextLine().trim();
-        System.out.println(dishesData.printDishesByType(dishType));
-    }
-
-    private static void printAllDinner() {
-        System.out.println("На текущий момент сгенерированы следующие варианты меню:");
-        System.out.println(dc.limitCombination); // Дописать позже вывод списка
+        System.out.println(dishesData.getAllDishesByType(dishType));
     }
 
     private static void generateDishCombo() {
@@ -85,6 +77,7 @@ public class Main {
             if (numberOfCombos < 1 || numberOfCombos > dc.limitCombination) {
                 System.out.println("Вы ввел некорректное количество комбинаций.");
                 System.out.println("Укажите значение в диапазоне от 1 до " + dc.limitCombination);
+                break;
             } else {
                 scanner.nextLine().trim();
 
@@ -101,21 +94,25 @@ public class Main {
                     if (dishesData.checkDishesType(nextItem)) {
                         typeOfDishes.add(nextItem);
                     } else {
-                        System.out.println("Ты ввел невернный тип!");
+                        System.out.println("Ты ввел неверный тип!");
                         return;
                     }
                 }
             }
             for(int i = 1; i <= numberOfCombos; i++){
                 System.out.println("Комбо " + i);
+
                 for(String dishType : typeOfDishes) {
                     // сгенерируйте комбинации блюд
-                    System.out.println(typeOfDishes.get(dc.generateDishCombo(dishType)));
+                    // поскольку я разнес на разные методы конструктор и методы работы с блюдами
+                    // приходится отдельно получать список блюд
+                    ArrayList<String> dishesList = dishesData.getAllDishesByType(dishType);
+                    // Для каждого из списка выбирать одно из случайных значений
+                    System.out.print(dc.generateDishCombo(dishesList)+ " ");
                 }
-
+                System.out.println();
+                break;
             }
-
-
         }
     }
 }
